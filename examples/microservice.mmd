@@ -1,0 +1,52 @@
+graph TD
+    subgraph Client Layer
+        Web[Web App]
+        iOS[iOS App]
+        Android[Android App]
+    end
+
+    subgraph Gateway
+        Nginx[Nginx]
+        Kong[Kong API Gateway]
+    end
+
+    subgraph Core Services
+        UserSvc[User Service]
+        OrderSvc[Order Service]
+        PaySvc[Payment Service]
+        NotifySvc[Notification Service]
+    end
+
+    subgraph Data Layer
+        MySQL[(MySQL)]
+        Redis[(Redis)]
+        ES[(Elasticsearch)]
+        RabbitMQ[RabbitMQ]
+    end
+
+    subgraph Infrastructure
+        K8s[Kubernetes]
+        Prometheus[Prometheus]
+        Grafana[Grafana]
+    end
+
+    Web --> Nginx
+    iOS --> Nginx
+    Android --> Nginx
+    Nginx --> Kong
+    Kong --> UserSvc
+    Kong --> OrderSvc
+    Kong --> PaySvc
+    UserSvc --> MySQL
+    UserSvc --> Redis
+    OrderSvc --> MySQL
+    OrderSvc --> RabbitMQ
+    PaySvc --> MySQL
+    NotifySvc --> RabbitMQ
+    NotifySvc --> ES
+    K8s --> UserSvc
+    K8s --> OrderSvc
+    K8s --> PaySvc
+    K8s --> NotifySvc
+    Prometheus --> K8s
+    Grafana --> Prometheus

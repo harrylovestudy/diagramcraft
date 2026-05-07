@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "diagramcraft"
+version = "0.1.0"
+description = "A CLI diagram drawing tool powered by Mermaid.js, designed for QwenPaw workflow integration"
+readme = "README_EN.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "DiagramCraft Contributors"},
+]
+keywords = ["diagram", "mermaid", "flowchart", "architecture", "cli", "visualization", "documentation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Documentation",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "typer[all]>=0.9.0",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.urls]
+Homepage = "https://github.com/harrylovestudy/diagramcraft"
+Documentation = "https://github.com/harrylovestudy/diagramcraft#readme"
+Repository = "https://github.com/harrylovestudy/diagramcraft"
+Issues = "https://github.com/harrylovestudy/diagramcraft/issues"
+
+[project.scripts]
+diagramcraft = "diagramcraft.cli:app"

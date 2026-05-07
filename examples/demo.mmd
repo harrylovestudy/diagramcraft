@@ -1,0 +1,21 @@
+graph TD
+    A[User Request] --> B{Parse Input}
+    B -->|File| C[Read File]
+    B -->|String| D[Use Directly]
+    B -->|Stdin| E[Read Stdin]
+
+    C --> F[Validate Syntax]
+    D --> F
+    E --> F
+
+    F -->|Valid| G[Render with mmdc]
+    F -->|Invalid| H[Show Error]
+
+    G --> I{Output Format}
+    I -->|PNG| J[Export PNG]
+    I -->|SVG| K[Export SVG]
+    I -->|PDF| L[Export PDF]
+
+    J --> M[Done]
+    K --> M
+    L --> M

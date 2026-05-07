@@ -1,0 +1,19 @@
+stateDiagram-v2
+    [*] --> Idle
+
+    Idle --> Connecting: connect()
+    Connecting --> Connected: success
+    Connecting --> Error: timeout
+    Connecting --> Idle: cancel
+
+    Connected --> Processing: send()
+    Connected --> Idle: disconnect()
+
+    Processing --> Connected: response
+    Processing --> Error: timeout
+    Processing --> Connected: retry
+
+    Error --> Idle: reset()
+    Error --> Connecting: reconnect()
+
+    Idle --> [*]: destroy()

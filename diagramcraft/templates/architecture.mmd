@@ -1,0 +1,34 @@
+graph TD
+    subgraph Client
+        Browser[Web Browser]
+        Mobile[Mobile App]
+    end
+
+    subgraph Gateway
+        LB[Load Balancer]
+        API[API Gateway]
+    end
+
+    subgraph Services
+        Auth[Auth Service]
+        User[User Service]
+        Order[Order Service]
+    end
+
+    subgraph Data
+        DB[(Database)]
+        Cache[(Redis Cache)]
+        MQ[Message Queue]
+    end
+
+    Browser --> LB
+    Mobile --> LB
+    LB --> API
+    API --> Auth
+    API --> User
+    API --> Order
+    Auth --> DB
+    User --> DB
+    Order --> DB
+    Auth --> Cache
+    Order --> MQ

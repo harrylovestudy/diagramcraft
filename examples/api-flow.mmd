@@ -1,0 +1,38 @@
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Gateway
+    participant AuthService
+    participant UserService
+    participant Database
+    participant Cache
+
+    User->>Frontend: Login Request
+    Frontend->>Gateway: POST /api/login
+    Gateway->>AuthService: Validate Credentials
+    AuthService->>Cache: Check Session Cache
+
+    alt Cache Hit
+        Cache-->>AuthService: Session Data
+    else Cache Miss
+        AuthService->>Database: Query User
+        Database-->>AuthService: User Data
+        AuthService->>Cache: Store Session
+    end
+
+    AuthService-->>Gateway: JWT Token
+    Gateway-->>Frontend: Token + User Info
+    Frontend-->>User: Login Success
+
+    Note over User,Frontend: Authenticated Requests
+
+    User->>Frontend: Get Profile
+    Frontend->>Gateway: GET /api/profile (Bearer Token)
+    Gateway->>AuthService: Validate Token
+    AuthService-->>Gateway: Token Valid
+    Gateway->>UserService: Get Profile
+    UserService->>Cache: Check Profile Cache
+    Cache-->>UserService: Profile Data
+    UserService-->>Gateway: Profile
+    Gateway-->>Frontend: Profile Data
+    Frontend-->>User: Display Profile

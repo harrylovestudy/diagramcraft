@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant Client
+    participant API
+    participant Auth
+    participant DB
+
+    Client->>API: Request
+    API->>Auth: Validate Token
+    Auth->>DB: Check Session
+    DB-->>Auth: Session Valid
+    Auth-->>API: Authorized
+    API->>DB: Query Data
+    DB-->>API: Result
+    API-->>Client: Response

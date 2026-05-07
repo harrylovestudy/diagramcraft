@@ -1,0 +1,41 @@
+graph LR
+    subgraph Development
+        Code[Code Push]
+        PR[Pull Request]
+    end
+
+    subgraph CI Pipeline
+        Lint[Lint Check]
+        UnitTest[Unit Tests]
+        IntegrationTest[Integration Tests]
+        SecurityScan[Security Scan]
+        Build[Build Image]
+    end
+
+    subgraph CD Pipeline
+        Staging[Deploy Staging]
+        E2E[E2E Tests]
+        Approval[Manual Approval]
+        Production[Deploy Production]
+    end
+
+    subgraph Monitoring
+        HealthCheck[Health Check]
+        Alerts[Alerts]
+        Rollback[Rollback]
+    end
+
+    Code --> PR
+    PR --> Lint
+    Lint --> UnitTest
+    UnitTest --> IntegrationTest
+    IntegrationTest --> SecurityScan
+    SecurityScan --> Build
+    Build --> Staging
+    Staging --> E2E
+    E2E --> Approval
+    Approval --> Production
+    Production --> HealthCheck
+    HealthCheck --> Alerts
+    Alerts --> Rollback
+    Rollback --> Production

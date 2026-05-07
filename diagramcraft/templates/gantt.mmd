@@ -1,0 +1,12 @@
+gantt
+    title Project Timeline
+    dateFormat  YYYY-MM-DD
+    section Phase 1
+    Requirements    :done, req, 2024-01-01, 30d
+    Design          :done, design, after req, 20d
+    section Phase 2
+    Development     :active, dev, after design, 60d
+    Testing         :test, after dev, 20d
+    section Phase 3
+    Deployment      :deploy, after test, 10d
+    Monitoring      :monitor, after deploy, 14d
